@@ -1,0 +1,107 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	<LinearLayout
+		android:id="@+id/linear1"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="8dp"
+		android:background="#FFFFFF"
+		android:gravity="bottom"
+		android:orientation="vertical">
+		<androidx.cardview.widget.CardView
+			android:id="@+id/cardview_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="60dp"
+			android:orientation="vertical"
+			app:cardElevation="1dp"
+			app:cardCornerRadius="16dp">
+			<LinearLayout
+				android:id="@+id/linear2"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:padding="8dp"
+				android:background="#F5F5F5"
+				android:gravity="center_horizontal"
+				android:orientation="vertical">
+				<ImageView
+					android:id="@+id/imageview1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="40dp"
+					android:src="@drawable/default_image"
+					android:scaleType="center" />
+				<TextView
+					android:id="@+id/textview1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="15dp"
+					android:padding="8dp"
+					android:text="Login"
+					android:textSize="18sp"
+					android:textStyle="bold"
+					android:textColor="#343434" />
+				<TextView
+					android:id="@+id/textview2"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="30dp"
+					android:padding="8dp"
+					android:text="Email Address"
+					android:textSize="14sp"
+					android:textColor="#343434" />
+				<androidx.cardview.widget.CardView
+					android:id="@+id/cardview2"
+					android:layout_width="match_parent"
+					android:layout_height="50dp"
+					android:gravity="center_horizontal|center_vertical"
+					android:orientation="vertical"
+					app:cardElevation="1dp"
+					app:cardCornerRadius="10dp">
+					<LinearLayout
+						android:id="@+id/edittext_container"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:padding="8dp"
+						android:background="#DFDFDF"
+						android:orientation="horizontal">
+						<EditText
+							android:id="@+id/edittext2"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:padding="8dp"
+							android:textSize="12sp"
+							android:textColor="#343434"
+							android:hint="Enter Email Address"
+							android:textColorHint="#607D8B"
+							android:imeOptions="actionDone"
+							android:layout_gravity="center_horizontal|center_vertical"
+							android:inputType="textEmailAddress"
+							android:background="@android:color/transparent" />
+					</LinearLayout>
+				</androidx.cardview.widget.CardView>
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/materialbutton1"
+					android:layout_width="200dp"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="60dp"
+					android:layout_marginBottom="60dp"
+					android:padding="8dp"
+					android:gravity="center_horizontal|center_vertical"
+					android:text="Login"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					android:textColor="#4D4D4D"
+					android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+					app:backgroundTint="#AEAEAE"
+					app:cornerRadius="100dp"
+					style="@style/Widget.MaterialComponents.Button" />
+			</LinearLayout>
+		</androidx.cardview.widget.CardView>
+	</LinearLayout>
+</LinearLayout>
