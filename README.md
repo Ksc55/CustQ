@@ -18,3 +18,6 @@
 
 
 
+Example screen record video to show the testing of the app
+https://github.com/Ksc55/CustQ/assets/94205435/93d1a35a-8b9f-4e03-a02b-439f14e7c784
+
