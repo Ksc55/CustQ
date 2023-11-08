@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp"
-            android:background="#FFFFFF"
+            android:background="#F5F5F5"
             android:gravity="center_horizontal"
             android:orientation="vertical">
             <TextView
@@ -73,9 +73,11 @@
                     android:textSize="16sp"
                     android:textColor="#4D4D4D"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    app:backgroundTint="#AEAEAE"
+                    app:backgroundTint="#F5F5F5"
                     app:cornerRadius="100dp"
-                    style="@style/Widget.MaterialComponents.Button" />
+                    style="@style/Widget.MaterialComponents.Button"
+                    app:strokeColor="#000000"
+                    app:strokeWidth="1dp" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/materialbutton2"
                     android:layout_width="160dp"
@@ -84,9 +86,9 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:text="No,Go Back"
                     android:textSize="16sp"
-                    android:textColor="#4D4D4D"
+                    android:textColor="#000000"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    app:backgroundTint="#FFFFFF"
+                    app:backgroundTint="#2E4BF2"
                     app:cornerRadius="100dp"
                     style="@style/Widget.MaterialComponents.Button" />
             </LinearLayout>

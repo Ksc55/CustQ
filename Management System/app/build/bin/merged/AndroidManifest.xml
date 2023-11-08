@@ -81,7 +81,7 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:supportsPictureInPicture="true"
-            android:theme="@style/AppTheme.FullScreen"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.devposthackathon.managementsystem.ExitConfirmationActivity"
@@ -94,6 +94,15 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.devposthackathon.managementsystem.RateServiceActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.devposthackathon.managementsystem.ActiveQueuesActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:exported="false"
             android:hardwareAccelerated="true"

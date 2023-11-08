@@ -3,17 +3,21 @@ package com.devposthackathon.managementsystem;
 import android.animation.*;
 import android.app.*;
 import android.content.*;
+import android.content.Intent;
 import android.content.res.*;
 import android.graphics.*;
 import android.graphics.Typeface;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
+import android.net.Uri;
 import android.os.*;
+import android.os.Bundle;
 import android.text.*;
 import android.text.style.*;
 import android.util.*;
 import android.view.*;
+import android.view.View;
 import android.view.View.*;
 import android.view.animation.*;
 import android.webkit.*;
@@ -30,12 +34,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.button.*;
 import java.io.*;
+import java.io.InputStream;
 import java.text.*;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.*;
 import org.json.*;
 
 public class QueueStatusFragmentActivity extends Fragment {
+	
+	private ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
 	
 	private ScrollView vscroll1;
 	private LinearLayout linear1;
@@ -50,6 +59,7 @@ public class QueueStatusFragmentActivity extends Fragment {
 	private MaterialButton materialbutton2;
 	private TextView textview27;
 	private HorizontalScrollView hscroll2;
+	private MaterialButton materialbutton3;
 	private TextView textview2;
 	private TextView textview3;
 	private TextView id_text_num;
@@ -111,6 +121,9 @@ public class QueueStatusFragmentActivity extends Fragment {
 	private TextView textview44;
 	private TextView textview45;
 	
+	private Intent intent = new Intent();
+	private AlertDialog cust;
+	
 	@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater _inflater, @Nullable ViewGroup _container, @Nullable Bundle _savedInstanceState) {
@@ -134,6 +147,7 @@ public class QueueStatusFragmentActivity extends Fragment {
 		materialbutton2 = _view.findViewById(R.id.materialbutton2);
 		textview27 = _view.findViewById(R.id.textview27);
 		hscroll2 = _view.findViewById(R.id.hscroll2);
+		materialbutton3 = _view.findViewById(R.id.materialbutton3);
 		textview2 = _view.findViewById(R.id.textview2);
 		textview3 = _view.findViewById(R.id.textview3);
 		id_text_num = _view.findViewById(R.id.id_text_num);
@@ -194,6 +208,73 @@ public class QueueStatusFragmentActivity extends Fragment {
 		linear19 = _view.findViewById(R.id.linear19);
 		textview44 = _view.findViewById(R.id.textview44);
 		textview45 = _view.findViewById(R.id.textview45);
+		
+		materialbutton1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				
+			}
+		});
+		
+		materialbutton2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				intent.setClass(getContext().getApplicationContext(), ViewMoreQueueActivity.class);
+				intent.putExtra("queue_type", textview1.getText().toString());
+				startActivity(intent);
+			}
+		});
+		
+		materialbutton3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				intent.setClass(getContext().getApplicationContext(), ViewMoreQueueActivity.class);
+				intent.putExtra("queue_type", textview1.getText().toString());
+				startActivity(intent);
+			}
+		});
+		
+		linear6.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_showDialog1(textview21.getText().toString(), textview7.getText().toString(), Integer.parseInt(textview23.getText().toString()));
+			}
+		});
+		
+		linear7.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_showDialog1(textview8.getText().toString(), textview10.getText().toString(), Integer.parseInt(textview12.getText().toString()));
+			}
+		});
+		
+		linear8.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_showDialog1(textview13.getText().toString(), textview15.getText().toString(), Integer.parseInt(textview17.getText().toString()));
+			}
+		});
+		
+		linear14.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_showDialog1(textview28.getText().toString(), textview30.getText().toString(), Integer.parseInt(textview32.getText().toString()));
+			}
+		});
+		
+		linear16.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_showDialog1(textview34.getText().toString(), textview36.getText().toString(), Integer.parseInt(textview38.getText().toString()));
+			}
+		});
+		
+		linear18.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_showDialog1(textview40.getText().toString(), textview42.getText().toString(), Integer.parseInt(textview44.getText().toString()));
+			}
+		});
 	}
 	
 	private void initializeLogic() {
@@ -203,6 +284,46 @@ public class QueueStatusFragmentActivity extends Fragment {
 	public void _decorateView() {
 		response_time.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/bold.ttf"), 1);
 		id_text_num.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/bold.ttf"), 1);
+		materialbutton2.setText("VIEW MORE");
+		materialbutton3.setText("VIEW MORE");
+	}
+	
+	
+	public void _showDialog1(final String _queueNo, final String _tokenNo, final int _estTime) {
+		cust = new AlertDialog.Builder(getActivity()).create();
+		LayoutInflater custLI = getActivity().getLayoutInflater();
+		View custCV = (View) custLI.inflate(R.layout.join_queue_dialog, null);
+		cust.setView(custCV);
+		final com.google.android.material.button.MaterialButton accept = (com.google.android.material.button.MaterialButton)
+		custCV.findViewById(R.id.materialbutton1);
+		final com.google.android.material.button.MaterialButton decline = (com.google.android.material.button.MaterialButton)
+		custCV.findViewById(R.id.materialbutton2);
+		cust.setCancelable(true);
+		cust.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		accept.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_dismissDialog();
+				intent.setClass(getContext().getApplicationContext(), ActiveQueuesActivity.class);
+				intent.putExtra("Queue", _queueNo);
+				intent.putExtra("Token", _tokenNo);
+				intent.putExtra("Time", String.valueOf((int)(_estTime)));
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
+		decline.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_dismissDialog();
+			}
+		});
+		cust.show();
+	}
+	
+	
+	public void _dismissDialog() {
+		cust.dismiss();
 	}
 	
 }

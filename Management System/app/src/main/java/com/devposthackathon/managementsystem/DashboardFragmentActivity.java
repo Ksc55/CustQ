@@ -24,6 +24,7 @@ import android.webkit.*;
 import android.widget.*;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,12 +37,18 @@ import java.io.*;
 import java.io.InputStream;
 import java.text.*;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.*;
 import org.json.*;
 
 public class DashboardFragmentActivity extends Fragment {
 	
+	private ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
+	
 	private LinearLayout linear2;
+	private ScrollView vscroll2;
+	private LinearLayout linear13;
 	private LinearLayout linear1;
 	private LinearLayout linear3;
 	private TextView textview18;
@@ -96,6 +103,8 @@ public class DashboardFragmentActivity extends Fragment {
 	
 	private void initialize(Bundle _savedInstanceState, View _view) {
 		linear2 = _view.findViewById(R.id.linear2);
+		vscroll2 = _view.findViewById(R.id.vscroll2);
+		linear13 = _view.findViewById(R.id.linear13);
 		linear1 = _view.findViewById(R.id.linear1);
 		linear3 = _view.findViewById(R.id.linear3);
 		textview18 = _view.findViewById(R.id.textview18);
@@ -136,6 +145,15 @@ public class DashboardFragmentActivity extends Fragment {
 		textview17 = _view.findViewById(R.id.textview17);
 		textview25 = _view.findViewById(R.id.textview25);
 		
+		materialbutton1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				intent.setClass(getContext().getApplicationContext(), ViewMoreQueueActivity.class);
+				intent.putExtra("queue_type", textview18.getText().toString());
+				startActivity(intent);
+			}
+		});
+		
 		linear5.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
@@ -164,6 +182,7 @@ public class DashboardFragmentActivity extends Fragment {
 	
 	public void _decorateView() {
 		materialbutton1.setStrokeWidth((int) 0.5d);
+		materialbutton1.setText("VIEW MORE");
 		materialbutton1.setStrokeColor(ColorStateList.valueOf(0xFF343434));
 		name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/bold.ttf"), 1);
 		shop_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/bold.ttf"), 1);
@@ -178,19 +197,18 @@ public class DashboardFragmentActivity extends Fragment {
 		final com.google.android.material.button.MaterialButton accept = (com.google.android.material.button.MaterialButton)
 		custCV.findViewById(R.id.materialbutton1);
 		final com.google.android.material.button.MaterialButton decline = (com.google.android.material.button.MaterialButton)
-		custCV.findViewById(R.id.materialbutton1);
+		custCV.findViewById(R.id.materialbutton2);
 		cust.setCancelable(true);
 		cust.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		decline.setStrokeWidth((int) 0.5d);
-		decline.setStrokeColor(ColorStateList.valueOf(0xFF343434));
 		accept.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
 				_dismissDialog();
-				intent.setClass(getContext().getApplicationContext(), QueueScreenActivity.class);
+				intent.setClass(getContext().getApplicationContext(), ActiveQueuesActivity.class);
 				intent.putExtra("Queue", _queueNo);
 				intent.putExtra("Token", _tokenNo);
 				intent.putExtra("Time", String.valueOf((int)(_estTime)));
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
 		});
