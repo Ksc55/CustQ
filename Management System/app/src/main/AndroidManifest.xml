@@ -50,22 +50,13 @@
 			android:exported="false" />
 		<activity
 			android:name=".HomeScreenActivity"
-            android:exported="false"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
 			android:hardwareAccelerated="true"
 			android:supportsPictureInPicture="true"
 			android:theme="@style/AppTheme.FullScreen"
 			android:screenOrientation="portrait"
-			android:windowSoftInputMode="stateHidden" />
-		<activity
-			android:name=".QueueScreenActivity"
-            android:exported="false"
-			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
-			android:hardwareAccelerated="true"
-			android:supportsPictureInPicture="true"
-			android:theme="@style/AppTheme.FullScreen"
-			android:screenOrientation="portrait"
-			android:windowSoftInputMode="stateHidden" />
+			android:windowSoftInputMode="stateHidden" 
+            android:exported="false" />
 		<activity
 			android:name=".ViewMoreQueueActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
@@ -103,8 +94,17 @@
 			android:windowSoftInputMode="stateHidden"
 			android:exported="false" />
 		<activity
+			android:name=".QueueStatusActivity"
+			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+			android:hardwareAccelerated="true"
+			android:supportsPictureInPicture="true"
+			android:screenOrientation="portrait"
+			android:theme="@style/AppTheme"
+			android:windowSoftInputMode="stateHidden"
+			android:exported="false" />
+		<activity
 			android:name=".DebugActivity"
-            android:exported="false"
-			android:screenOrientation="portrait" />
+			android:screenOrientation="portrait"
+            android:exported="false" />
 	</application>
 </manifest>

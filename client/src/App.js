@@ -7,13 +7,14 @@ import Otpverify from "./pages/Otpverify";
 import DeleteConfirm from "./pages/DeleteConfirm";
 import ResetConfirm from "./pages/ResetConfirm";
 import TokenCreation from "./pages/TokenCreation";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Signup />} />
+          <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/otpverify" element={<Otpverify />} />
           <Route path="/login" element={<Login />} />

@@ -209,6 +209,7 @@ const Signup = () => {
                 id="password"
                 value={password}
                 placeholder="Enter your password"
+                autocomplete="current-password"
                 onChange={handlePasswordChange}
                 className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
                 required
