@@ -1,13 +1,16 @@
 # CustQ
 
+# SPLASH SCREEN
+![超级截屏_20231110_203100](https://github.com/Ksc55/CustQ/assets/94205435/00def03d-e9b4-41fc-a00c-30c459ea93b2)
+
 # LOGIN SCREEN
-![超级截屏_20231104_103913](https://github.com/Ksc55/CustQ/assets/94205435/4e9a21e3-e0bc-45e9-b20d-cb1a9fc1882f)
+![超级截屏_20231110_203110](https://github.com/Ksc55/CustQ/assets/94205435/b5e709c1-aaab-4a39-ae97-1111f7e3383b)
 
 # OTP CONFIRMATION SCREEN
-![超级截屏_20231106_164032](https://github.com/Ksc55/CustQ/assets/94205435/4afbd1e8-5444-4634-9e20-fb552c407dfe)
+![超级截屏_20231110_203121](https://github.com/Ksc55/CustQ/assets/94205435/c69222c6-2f3e-41d8-b963-5d9554cb0e29)
 
-# DASHBOARD SCREEN FRAGMENT
-![超级截屏_20231106_164040](https://github.com/Ksc55/CustQ/assets/94205435/4e7c8312-40ef-4f5e-80a1-528b50aadaf8)
+# DASHBOARD SCREEN
+![超级截屏_20231110_203133](https://github.com/Ksc55/CustQ/assets/94205435/b982e3b2-8841-4af9-a1c5-568774f94a53)
 
 # ACTIVE QUEUE SCREEN FRAGMENT
 ![超级截屏_20231106_164058](https://github.com/Ksc55/CustQ/assets/94205435/08432439-1ee8-4391-98b5-ab24190322bc)
