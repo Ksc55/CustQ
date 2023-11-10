@@ -96,7 +96,7 @@ public class ViewMoreQueueActivity extends AppCompatActivity {
 	
 	public void _decorateView() {
 		queue_type.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/bold.ttf"), 1);
-		queue_type.setText(getIntent().getStringExtra("queue_type"));
+		queue_type.setText(getIntent().getStringExtra("topic"));
 	}
 	
 	
