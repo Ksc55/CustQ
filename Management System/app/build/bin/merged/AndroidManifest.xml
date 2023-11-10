@@ -66,15 +66,6 @@
             android:theme="@style/AppTheme.FullScreen"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.devposthackathon.managementsystem.QueueScreenActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
-            android:supportsPictureInPicture="true"
-            android:theme="@style/AppTheme.FullScreen"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name="com.devposthackathon.managementsystem.ViewMoreQueueActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:exported="false"
@@ -103,6 +94,15 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.devposthackathon.managementsystem.ActiveQueuesActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.devposthackathon.managementsystem.QueueStatusActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:exported="false"
             android:hardwareAccelerated="true"
