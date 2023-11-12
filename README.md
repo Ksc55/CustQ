@@ -10,8 +10,14 @@ An industry-agnostic queue management solution for all customers.
   2) End User:
      ![image](https://github.com/Ksc55/CustQ/assets/6066608/f15b3916-ac3c-44e6-9d3f-bea81e2ce7d1)
 
+- Prototype:
+  Admin User
+  https://www.figma.com/proto/vGPLdoHfcZiml5dux6U5Kk/KSC55-Devpost-Hackathon?page-id=0%3A1&type=design&node-id=10-660&viewport=948%2C528%2C0.18&t=SGytJwyqZmNKBl16-1&scaling=scale-down&starting-point-node-id=29%3A3583&show-proto-sidebar=1&mode=design
+
+  End User:
+  https://www.figma.com/proto/AlWZgt8Z62Y8iRRWRqdUlw/Untitled?page-id=0%3A1&type=design&node-id=1-4561&viewport=29%2C66%2C0.12&t=wurl3rJ3vNvzwzcP-1&scaling=scale-down&starting-point-node-id=1%3A4561&mode=design
+  
 - Demonstration video of the project:
-  Screen record video to show the testing of the app
   https://github.com/Ksc55/CustQ/assets/94205435/93d1a35a-8b9f-4e03-a02b-439f14e7c784
   
 - Technologies Used:
@@ -25,8 +31,6 @@ An industry-agnostic queue management solution for all customers.
 ![image](https://github.com/Ksc55/CustQ/assets/6066608/32df61a9-c69b-4f63-b86b-07adb93f0c5b)
 
 ![image](https://github.com/Ksc55/CustQ/assets/6066608/cdba6f6e-d234-4736-8e4d-1bf1540535d8)
-
-
     
 - How to deploy this project:
   1) Backend:
