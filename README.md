@@ -1,13 +1,19 @@
 # CustQ
 An industry-agnostic queue management solution for all customers.
-- Project Overview:
 
+- Project Overview:
+  The project focuses on handling the basic problem of managing the queue for any place making it easy for the operations while facilitating the end user in an effective transparent way.
+  
 - Workflow:
   1) Admin:
      ![image](https://github.com/Ksc55/CustQ/assets/6066608/0f7f7e07-f855-4238-8a50-3c45f2fcfc4f)
   2) End User:
      ![image](https://github.com/Ksc55/CustQ/assets/6066608/f15b3916-ac3c-44e6-9d3f-bea81e2ce7d1)
 
+- Demonstration video of the project:
+  Screen record video to show the testing of the app
+  https://github.com/Ksc55/CustQ/assets/94205435/93d1a35a-8b9f-4e03-a02b-439f14e7c784
+  
 - Technologies Used:
     -  Backend:    Java with Spring Boot
     -  Frontend:   ReactJS
@@ -16,11 +22,35 @@ An industry-agnostic queue management solution for all customers.
     -  Chatbot:    Python with Flask
       
 - Architectural Diagram:
+![image](https://github.com/Ksc55/CustQ/assets/6066608/32df61a9-c69b-4f63-b86b-07adb93f0c5b)
+
+![image](https://github.com/Ksc55/CustQ/assets/6066608/cdba6f6e-d234-4736-8e4d-1bf1540535d8)
+
+![image](https://github.com/Ksc55/CustQ/assets/6066608/d7dced39-dd2f-44ab-9b34-5a5c11cd9ea6)
+
 
     
 - How to deploy this project:
   1) Backend:
+  - Create an Openshift account
+  - Click on "Add: and select Database
+  - Select PostgreSQL and click on "Instantiate Template"
+  - Add the following details in username and password: postgres
+  - Run the sqlscripts.sql from backend/db folder
+  - Click on "Add" and select "Git Repository" Option
+  - Enter the following URL in Git Repo URL - [https://github.com/Ksc55/CustQ/tree/main/](https://github.com/Ksc55/CustQ.git)
+  - Open advanced Git options and enter "backend" in Context dir without quotes
+  - Select Import Strategy as Builder Image and select Java as the builder image
+  - Add the environment variables :
+        - SQL_URL: jdbc:postgresql://postgresql:5432/sampledb
+        - SQL_USER: postgres
+        - SQL_PASSWORD: postgres
+    
   2) Frontend:
+  - Click on "Add" and select "Git Repository" Option
+  - Enter the following URL in Git Repo URL - [https://github.com/Ksc55/CustQ/tree/main/](https://github.com/Ksc55/CustQ.git)
+  - Open advanced Git options and enter "client" in Context dir without quotes
+  - Select Import Strategy as Builder Image and select Javascript as the builder image
   
 - Demo screens:
   1) Admin Screens:
@@ -63,7 +93,5 @@ An industry-agnostic queue management solution for all customers.
     ![超级截屏_20231110_203303](https://github.com/Ksc55/CustQ/assets/94205435/5b2b9b72-fa7e-4c22-b697-2ca15afed29b)
 
 
-- Demonstration video of the project:
-  Example screen record video to show the testing of the app
-  https://github.com/Ksc55/CustQ/assets/94205435/93d1a35a-8b9f-4e03-a02b-439f14e7c784
+
   
