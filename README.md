@@ -26,8 +26,6 @@ An industry-agnostic queue management solution for all customers.
 
 ![image](https://github.com/Ksc55/CustQ/assets/6066608/cdba6f6e-d234-4736-8e4d-1bf1540535d8)
 
-![image](https://github.com/Ksc55/CustQ/assets/6066608/d7dced39-dd2f-44ab-9b34-5a5c11cd9ea6)
-
 
     
 - How to deploy this project:
@@ -45,17 +43,17 @@ An industry-agnostic queue management solution for all customers.
         - SQL_URL: jdbc:postgresql://postgresql:5432/sampledb
         - SQL_USER: postgres
         - SQL_PASSWORD: postgres
-    
+  - Submit this and wait for the build and deployment to complete.
+
   2) Frontend:
   - Click on "Add" and select "Git Repository" Option
   - Enter the following URL in Git Repo URL - [https://github.com/Ksc55/CustQ/tree/main/](https://github.com/Ksc55/CustQ.git)
   - Open advanced Git options and enter "client" in Context dir without quotes
-  - Select Import Strategy as Builder Image and select Javascript as the builder image
+  - Select Import Strategy as Builder Image and select Javascript as the builder image.
+  - Submit this and wait for the build and deployment to complete.
   
 - Demo screens:
-  1) Admin Screens:
-
-  2) End User Screens:
+  1) End User Screens:
     - SPLASH SCREEN
       ![超级截屏_20231110_203100](https://github.com/Ksc55/CustQ/assets/94205435/00def03d-e9b4-41fc-a00c-30c459ea93b2)
       
