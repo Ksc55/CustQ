@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import Header from "../components/Header";
+import { Eye, EyeOff } from "lucide-react";
+import axios from "axios";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies();
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
   const [errors, setErrors] = useState({
     name: "",
     mobile: "",
@@ -22,19 +27,70 @@ const Signup = () => {
   };
 
   const handleMobileChange = (e) => {
-    setMobile(e.target.value);
+    const enteredMobile = e.target.value;
+    setMobile(enteredMobile);
+
+    const mobileRegex = /^\d{10}$/;
+
+    if (!mobileRegex.test(enteredMobile)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        mobile: "Mobile number must be 10 digits",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        mobile: "",
+      }));
+    }
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const enteredEmail = e.target.value;
+    setEmail(enteredEmail);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(enteredEmail)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Enter a valid email address",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "",
+      }));
+    }
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const enteredPassword = e.target.value;
+    setPassword(enteredPassword);
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,}$/;
+
+    if (!passwordRegex.test(enteredPassword)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "Password must have 8 characters like Aabb@1234",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "",
+      }));
+    }
   };
 
   const handleReenterPasswordChange = (e) => {
     setReenterPassword(e.target.value);
+  };
+
+  const handleClick = () => {
+    setPasswordType((prevType) =>
+      prevType === "password" ? "text" : "password"
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -42,29 +98,9 @@ const Signup = () => {
     let hasError = false;
     const updatedErrors = {};
 
-    if (name.trim() === "") {
-      updatedErrors.name = "Name is required";
-      hasError = true;
-    }
-
-    if (mobile.trim() === "") {
-      updatedErrors.mobile = "Mobile number is required";
-      hasError = true;
-    }
-
-    if (email.trim() === "") {
-      updatedErrors.email = "Email is required";
-      hasError = true;
-    }
-
-    if (password.trim() === "") {
-      updatedErrors.password = "Password is required";
-      hasError = true;
-    }
-
     if (password !== reenterPassword) {
-      updatedErrors.reenterPassword = "Passwords do not match";
       hasError = true;
+      updatedErrors.reenterPassword = "Passwords do not match";
     }
 
     if (hasError) {
@@ -86,51 +122,33 @@ const Signup = () => {
       };
 
       try {
-        const response = await fetch("YOUR_BACKEND_API_ENDPOINT", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await axios.post(
+          "http://localhost:8080/registration/registerOrganization",
+          formData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-        if (response.ok) {
-          console.log("Form data sent to the backend successfully");
-          toast.success("🙏 Thank You, Our Team will contact you soon.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
+        if (response.status === 200) {
+          const { id } = response.data;
+
+          // Set cookies for the user
+          console.log(cookies);
+          setCookie("cachedEmail", email, {
+            expires: new Date(Date.now() + 86400 * 1000),
           });
+          setCookie("cachedRegisterID", id, {
+            expires: new Date(Date.now() + 86400 * 1000),
+          });
+          navigate(`/otpverify/${id}`);
         } else {
-          console.error("Failed to send form data to the backend");
-          toast.error("Error while sending the form data. Please try again.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          console.error("Error during signup:", response);
         }
       } catch (error) {
-        console.error("Error while sending form data to the backend", error);
-        toast.error("Error while sending the form data. Please try again.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        console.error("Error during signup:", error);
       }
 
       setName("");
@@ -144,10 +162,10 @@ const Signup = () => {
   return (
     <>
       <Header />
-      <div className="py-4  h-[110vh] ">
+      <div className="py-4 h-[110vh] font-montserrat select-none ">
         <div className="w-[750px] bg-[#F5F5F5] text-base mx-auto mt-8 py-8 px-20 rounded-xl">
           <h1 className="text-4xl text-center">Sign Up</h1>
-          <form className="flex flex-col m-2">
+          <form className="flex flex-col m-2" onSubmit={handleSubmit}>
             <div className="flex flex-col m-2">
               <label htmlFor="name" className="font-semibold">
                 Name
@@ -188,8 +206,8 @@ const Signup = () => {
                 Mobile Number
               </label>
               <input
-                type="text"
-                id="mobileNumber"
+                type="number"
+                id="mobile"
                 className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
                 placeholder="Enter mobile number"
                 value={mobile}
@@ -200,46 +218,64 @@ const Signup = () => {
                 <span className="text-[#e16b35]">{errors.mobile}</span>
               )}
             </div>
-            <div className="flex flex-col m-2">
+            <div className="flex flex-col m-2 relative">
               <label htmlFor="password" className="block mb-2">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                placeholder="Enter your password"
-                autocomplete="current-password"
-                onChange={handlePasswordChange}
-                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
-                required
-              />
-              {errors.password && (
-                <span className="text-[#e16b35]">{errors.password}</span>
-              )}
+              <div className="relative">
+                <input
+                  type={passwordType}
+                  id="password"
+                  value={password}
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
+                  onChange={handlePasswordChange}
+                  className="w-full px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+                  required
+                />
+                {errors.password && (
+                  <p className="text-[#e16b35] absolute left-0 ">
+                    {errors.password}
+                  </p>
+                )}
+                <div
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                  onClick={handleClick}
+                >
+                  {passwordType === "password" ? (
+                    <Eye className="text-[#718096] hover:text-[#2d3748]" />
+                  ) : (
+                    <EyeOff className="text-[#718096] hover:text-[#2d3748]" />
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col m-2">
+            <div className="flex flex-col m-2 relative">
               <label htmlFor="reenterPassword" className="block mb-2">
                 Re-enter Password
               </label>
-              <input
-                type="password"
-                id="reenterPassword"
-                value={reenterPassword}
-                placeholder="Re-enter your password"
-                onChange={handleReenterPasswordChange}
-                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
-                required
-              />
-              {errors.reenterPassword && (
-                <span className="text-[#e16b35]">{errors.reenterPassword}</span>
-              )}
+              <div className="relative">
+                <input
+                  type="password"
+                  id="reenterPassword"
+                  value={reenterPassword}
+                  placeholder="Re-enter your password"
+                  onChange={handleReenterPasswordChange}
+                  className="w-full px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+                  required
+                />
+                {errors.reenterPassword && (
+                  <p className="text-[#e16b35] absolute left-0 mt-1">
+                    {errors.reenterPassword}
+                  </p>
+                )}
+              </div>
             </div>
             <div className="flex justify-center items-center">
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="max-w-fit mx-auto px-4 py-2 text-lg mt-4 font-semibold bg-[#AEAEAE] rounded-md "
+                className="max-w-fit mx-auto px-4 py-2 text-lg mt-4 font-semibold bg-[#AEAEAE] rounded-md"
               >
                 Submit
               </button>

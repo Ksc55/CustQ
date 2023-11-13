@@ -23,7 +23,7 @@ import java.util.Random;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    public static final String SUCCES_MESSAGE="Registration successfull";
+    public static final String SUCCES_MESSAGE = "Registration successfull";
 
     @Autowired
     RegistrationService registerService;
@@ -36,64 +36,67 @@ public class RegistrationController {
 
     @Autowired
     AuthenticationRepo authenticationRepo;
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/registerOrganization")
     public ResponseEntity<Object> registerOrganization(@RequestBody RegisterRequest registerRequest) throws Exception {
-        RegisterRequest savedRegisterRequest=new RegisterRequest();
-        try{
-            savedRegisterRequest=registerService.registerOrganization(registerRequest);
+        RegisterRequest savedRegisterRequest = new RegisterRequest();
+        try {
+            savedRegisterRequest = registerService.registerOrganization(registerRequest);
 
-            Random rand=new Random();
-            int otp=rand.nextInt(100000,999999);
-            //have to send to email
-            otpRepo.save(new OTPInfo(null,registerRequest.getEmail(),otp,false,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()+3600000)));
-        }
-        catch (Exception databaseException) {
+            Random rand = new Random();
+            int otp = rand.nextInt(100000, 999999);
+            // have to send to email
+            otpRepo.save(new OTPInfo(null, registerRequest.getEmail(), otp, false,
+                    new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis() + 3600000)));
+        } catch (Exception databaseException) {
             log.error(databaseException.getLocalizedMessage(), databaseException);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(databaseException.getLocalizedMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(databaseException.getLocalizedMessage());
         }
         return ResponseEntity.ok().body(savedRegisterRequest);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/emailValidation")
-    public ResponseEntity<String> emailValidation(@RequestBody OTPInfo otpInfo, @RequestParam Integer registerID){
+    public ResponseEntity<String> emailValidation(@RequestBody OTPInfo otpInfo, @RequestParam Integer registerID) {
 
         try {
             OTPInfo dbOtpInfo = otpRepo.findByEmail(otpInfo.getEmail());
 
-            if(!dbOtpInfo.getOTP().equals(otpInfo.getOTP())){
+            if (!dbOtpInfo.getOTP().equals(otpInfo.getOTP())) {
                 throw new Exception("false");
-            }
-            else{
-                otpRepo.updateIsUsed(true,dbOtpInfo.getOtpId());
+            } else {
+                otpRepo.updateIsUsed(true, dbOtpInfo.getOtpId());
             }
 
-            //insert Organization Table
-            String organizationName=registrationRepo.findByRegisterId(registerID);
-            //checks if the organization is present in current records
-            OrganizationInfo organizationInfo=registerService.getOrganization(organizationName);
-            //if not present add it to database
-            if(organizationInfo==null) {
+            // insert Organization Table
+            String organizationName = registrationRepo.findByRegisterId(registerID);
+            // checks if the organization is present in current records
+            OrganizationInfo organizationInfo = registerService.getOrganization(organizationName);
+            // if not present add it to database
+            if (organizationInfo == null) {
                 organizationInfo = registerService.saveOrganization(new OrganizationInfo(null, organizationName));
             }
 
-            //Authentication Table
-            RegisterRequest registrationInfo=registrationRepo.findById(registerID).get();
-            UserInfo userInfo=new UserInfo();
+            // Authentication Table
+            RegisterRequest registrationInfo = registrationRepo.findById(registerID).get();
+            UserInfo userInfo = new UserInfo();
             userInfo.setUserRole(UserRole.ORGANIZATION_USER);
             userInfo.setPhoneNumber(registrationInfo.getPhoneNumber());
             userInfo.setFirstName(registrationInfo.getFirstName());
             userInfo.setDeleted(false);
             userInfo.setLastName(registrationInfo.getLastName());
             userInfo.setUserPassword(Sha512DigestUtils.shaHex(registrationInfo.getPassword()));
-            UserInfo savedUserInfo=authenticationRepo.save(userInfo);
+            UserInfo savedUserInfo = authenticationRepo.save(userInfo);
 
-            //insert save UserOrganization
-            registerService.saveUserOrganization(new UserOrganization(savedUserInfo.getUserId(), organizationInfo.getOrganizationId()));
+            // insert save UserOrganization
+            registerService.saveUserOrganization(
+                    new UserOrganization(savedUserInfo.getUserId(), organizationInfo.getOrganizationId()));
 
             return ResponseEntity.ok("true");
-        }
-        catch(Exception exception){
-            log.error(exception.getLocalizedMessage(),exception);
+        } catch (Exception exception) {
+            log.error(exception.getLocalizedMessage(), exception);
             return ResponseEntity.internalServerError().body(exception.getLocalizedMessage());
         }
     }
