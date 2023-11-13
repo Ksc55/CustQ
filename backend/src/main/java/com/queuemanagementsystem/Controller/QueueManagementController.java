@@ -93,7 +93,7 @@ public class QueueManagementController {
         return queueManagementService.getQueueDetails(queueId);
     }
 
-    @GetMapping("getCurrentTokenNumber")
+    @GetMapping("/getCurrentTokenNumber")
     public int getCurrentTokenNumber(@RequestParam Integer queueId){
         return queueManagementService.getCurrentTokenForaQueue(queueId);
     }

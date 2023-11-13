@@ -8,6 +8,8 @@ import DeleteConfirm from "./pages/DeleteConfirm";
 import ResetConfirm from "./pages/ResetConfirm";
 import TokenCreation from "./pages/TokenCreation";
 import Home from "./pages/Home";
+import TokenSettings from "./pages/TokenSettings";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -16,11 +18,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/otpverify" element={<Otpverify />} />
+          <Route path="/otpverify/:id" element={<Otpverify />} />
           <Route path="/login" element={<Login />} />
           <Route path="/deleteconfirm" element={<DeleteConfirm />} />
           <Route path="/resetconfirm" element={<ResetConfirm />} />
           <Route path="/tokencreation" element={<TokenCreation />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tokensettings" element={<TokenSettings />} />
           <Route path="*" element={<Error404 />} />
           <Route path="/error404" element={<Error404 />} />
         </Routes>

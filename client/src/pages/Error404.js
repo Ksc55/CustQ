@@ -2,7 +2,7 @@ import React from "react";
 
 const Error404 = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-32 px-28">
+    <div className="flex flex-col items-center justify-center py-32 px-28 font-montserrat">
       <h1 className="text-3xl font-bold">Data Not Found</h1>
       <img
         src="/images/errorscreen.svg"
