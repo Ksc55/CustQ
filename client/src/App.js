@@ -10,6 +10,7 @@ import TokenCreation from "./pages/TokenCreation";
 import Home from "./pages/Home";
 import TokenSettings from "./pages/TokenSettings";
 import Dashboard from "./pages/Dashboard";
+import Reports from "./pages/Reports";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/resetconfirm" element={<ResetConfirm />} />
           <Route path="/tokencreation" element={<TokenCreation />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/reports" element={<Reports />} />
           <Route path="/tokensettings" element={<TokenSettings />} />
           <Route path="*" element={<Error404 />} />
           <Route path="/error404" element={<Error404 />} />

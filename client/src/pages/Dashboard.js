@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-row ">
       <Sidebar />
-      <div className="w-full flex items-center justify-center bg-[#DFDFDF]">
+      <div className="w-full h-[100vh] flex items-center justify-center bg-[#DFDFDF]">
         <h1 className="font-montserrat font-bold text-3xl text-center">
           This is a dashboard page
         </h1>

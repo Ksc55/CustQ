@@ -17,3 +17,8 @@
 .font-domine{
   font-family: 'Domine', serif;
 }
+
+.active {
+  background-color: #7381ff; /* Set your desired active background color */
+  color: #2e43ff; /* Set your desired active text color */
+}

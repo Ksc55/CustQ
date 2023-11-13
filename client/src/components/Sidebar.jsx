@@ -1,8 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 const Sidebar = () => {
+  const location = useLocation();
+
   return (
     <div className="flex flex-col relative items-center justify-center w-1/12 h-[96vh] bg-[#fff] font-montserrat">
       <div className="absolute top-8">
@@ -15,23 +17,36 @@ const Sidebar = () => {
         </NavLink>
       </div>
       <div className="flex flex-col items-center justify-center my-12">
-        <HashLink to="/dashboard" className="py-4">
+        <HashLink
+          to="/dashboard"
+          className={`my-4 ${
+            location.pathname === "/dashboard" ? "active" : ""
+          }`}
+        >
           <img
-            className="w-10 cursor-pointer"
+            className="w-8 cursor-pointer hover:bg-[#7381FF] text-[#2E43FF]"
             src="/images/dashboard.svg"
             alt="Logo"
           />
         </HashLink>
-        <HashLink to="/tokensettings" className="py-4">
+        <HashLink
+          to="/tokensettings"
+          className={`my-4 ${
+            location.pathname === "/tokensettings" ? "active" : ""
+          }`}
+        >
           <img
-            className="w-20 cursor-pointer"
+            className="w-12 cursor-pointer hover:bg-[#7381FF]  text-[#2E43FF]"
             src="/images/settings.svg"
             alt="Logo"
           />
         </HashLink>
-        <HashLink to="/reports" className="py-4">
+        <HashLink
+          to="/reports"
+          className={`my-4 ${location.pathname === "/reports" ? "active" : ""}`}
+        >
           <img
-            className="w-20 cursor-pointer"
+            className="w-12 cursor-pointer hover:bg-[#7381FF] hover:text-[#2E43FF]"
             src="/images/report.svg"
             alt="Logo"
           />
